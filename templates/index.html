@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Home — Content DSS{% endblock %}
+{% block content %}
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+  <div class="p-6 rounded-xl">
+    <h2 class="text-3xl font-bold mb-3">Ambil Keputusan Jenis Konten</h2>
+    <p class="text-gray-300/70 mb-6">
+      Gunakan kombinasi <span class="font-semibold">SAW</span> (normalisasi) dan
+      <span class="font-semibold">TOPSIS</span> (perankingan)
+      untuk menentukan jenis konten yang paling efektif menurut kriteria kamu.
+    </p>
+
+    <ul class="space-y-2 text-sm">
+      <li>• Input alternatif konten (minimal 2)</li>
+      <li>• Isi bobot kriteria sesuai prioritas</li>
+      <li>• Sistem akan menampilkan hasil menggunakan metode SAW dan TOPSIS</li>
+    </ul>
+
+    <div class="mt-6">
+      <a href="{{ url_for('input_data') }}"
+         class="inline-flex items-center gap-2 px-5 py-3 bg-accent rounded-lg font-semibold text-primarybg shadow">
+        Mulai Analisis
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+             fill="none" stroke="#1e1e29">
+          <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="p-6 rounded-xl bg-[linear-gradient(180deg,#132d46,rgba(19,45,70,0.7))]">
+    <h3 class="text-xl font-semibold mb-2">Kriteria yang digunakan</h3>
+    <div class="grid grid-cols-2 gap-3 text-sm">
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">Reach</div>
+        <div class="text-xs text-gray-200/70">Jumlah jangkauan post</div>
+      </div>
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">Views</div>
+        <div class="text-xs text-gray-200/70">Jumlah tayangan</div>
+      </div>
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">Engagement Rate</div>
+        <div class="text-xs text-gray-200/70">Interaksi relatif</div>
+      </div>
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">Branding</div>
+        <div class="text-xs text-gray-200/70">Nilai brand building</div>
+      </div>
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">CTA</div>
+        <div class="text-xs text-gray-200/70">Efektivitas call-to-action</div>
+      </div>
+      <div class="p-3 rounded bg-white/5">
+        <div class="font-medium">Cost Production</div>
+        <div class="text-xs text-gray-200/70">Biaya produksi (semakin kecil lebih baik)</div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

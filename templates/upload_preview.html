@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Preview Excel — Content DSS{% endblock %}
+{% block content %}
+<h3 class="text-lg font-semibold mb-3">Preview data dari Excel</h3>
+
+<div class="mb-4 overflow-x-auto">
+  <table class="w-full text-sm bg-white/5 rounded">
+    <thead>
+      <tr>
+        <th class="p-2">Alternatif</th>
+        {% for c in criteria %}
+          <th class="p-2">{{ c }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in range(names|length) %}
+      <tr>
+        <td class="p-2">{{ names[i] }}</td>
+        {% for v in data[i] %}
+          <td class="p-2">{{ v }}</td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+      {% if weights %}
+        <tr class="border-t border-white/10">
+        <td class="p-2 font-semibold">Bobot (terdeteksi)</td>
+        {% for w in weights %}
+            <td class="p-2 font-semibold">
+            {{ '%g'|format(w) }}
+            </td>
+        {% endfor %}
+        </tr>
+
+      {% endif %}
+    </tbody>
+  </table>
+</div>
+
+<form method="post" action="{{ url_for('input_data') }}">
+  <!-- kirim kembali ke /input sebagai hidden input -->
+  {% for i in range(names|length) %}
+    <input type="hidden" name="name[]" value="{{ names[i] }}">
+    {% for j in range(criteria|length) %}
+      <input type="hidden" name="c{{ j }}[]" value="{{ data[i][j] }}">
+    {% endfor %}
+  {% endfor %}
+
+  {% if weights %}
+    {% for j in range(criteria|length) %}
+      <input type="hidden" name="w{{ j }}" value="{{ weights[j] }}">
+    {% endfor %}
+  {% endif %}
+
+  <div class="flex gap-3">
+    <button type="submit"
+            class="px-4 py-2 bg-accent rounded text-primarybg">
+      Gunakan Data &amp; Lanjut
+    </button>
+    <a href="{{ url_for('upload_excel') }}"
+       class="px-4 py-2 bg-panel rounded">Kembali</a>
+  </div>
+</form>
+{% endblock %}

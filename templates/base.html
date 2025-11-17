@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block title %}Content DSS{% endblock %}</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primarybg: '#1e1e29',
+                        panel: '#132d46',
+                        accent: '#01c38e',
+                        paper: '#ffffff'
+                    },
+                    boxShadow: {
+                        'soft-lg': '0 10px 30px rgba(2,6,23,0.6)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+            background:
+                radial-gradient(1200px 500px at 10% 10%, rgba(1, 195, 142, 0.06), transparent 8%),
+                linear-gradient(180deg, #0e1318 0%, #111827 60%);
+            color: #e6eef6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .glass {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(6px);
+        }
+
+        .accent-text {
+            color: #01c38e;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-6px);
+        }
+
+        .smooth-enter {
+            transition: all .25s cubic-bezier(.2, .9, .2, 1);
+        }
+
+        .input-invalid {
+            border: 1.5px solid #f87171 !important;
+            box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.06);
+            background-color: rgba(248, 113, 113, 0.02);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen antialiased">
+
+    <div class="min-h-screen flex items-center justify-center px-4 py-8">
+        <div class="w-full max-w-6xl">
+            <!-- Header -->
+            <header class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-14 h-14 rounded-xl flex items-center justify-center bg-accent text-primarybg font-extrabold shadow-soft-lg">
+                        SPK
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-semibold">Content Decision Support</h1>
+                        <p class="text-sm text-gray-300/70">
+                            Pilih jenis konten terbaik untuk brand
+                        </p>
+                    </div>
+                </div>
+
+                <nav class="flex items-center gap-3">
+                    <a href="{{ url_for('index') }}"
+                        class="px-4 py-2 rounded-md glass text-sm hover:brightness-110">Home</a>
+
+                    <a href="{{ url_for('upload_excel') }}"
+                        class="px-4 py-2 rounded-md bg-accent text-primarybg text-sm font-medium shadow">Upload Excel</a>
+
+                    <!-- <a href="{{ url_for('input_data') }}"
+                        class="px-4 py-2 rounded-md bg-accent text-primarybg text-sm font-medium shadow">
+                        Mulai Analisis
+                    </a> -->
+                </nav>
+            </header>
+
+            <main>
+                <div class="glass rounded-2xl p-6 shadow-soft-lg">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                    <div class="mb-4 space-y-2">
+                        {% for cat, msg in messages %}
+                        <div
+                            class="p-3 rounded {{ 'bg-red-600' if cat=='danger' else 'bg-yellow-500' }} text-white text-sm">
+                            {{ msg }}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+
+            <footer class="mt-6 text-center text-sm text-gray-400/70">
+                Rois Surya Saputra | Ahmad | Adven Dwi Putra
+            </footer>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

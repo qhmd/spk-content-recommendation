@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Upload Excel — Content DSS{% endblock %}
+{% block content %}
+<h3 class="text-lg font-semibold mb-4">Upload Excel</h3>
+
+<form method="post" enctype="multipart/form-data">
+  <div class="mb-3">
+    <input type="file" name="excel" accept=".xlsx,.xls"
+           required class="block text-sm">
+  </div>
+  <div class="flex gap-3">
+    <button type="submit"
+            class="px-4 py-2 bg-accent rounded text-primarybg">
+      Upload &amp; Preview
+    </button>
+    <a href="{{ url_for('input_data') }}"
+       class="px-4 py-2 bg-panel rounded">Kembali</a>
+  </div>
+</form>
+
+<div class="mt-6 text-sm text-gray-300/70 space-y-2">
+  <p>Gunakan template Excel yang sudah disediakan agar sistem bisa membaca data dengan benar.</p>
+
+  <div>
+    <p class="font-semibold mb-1">Struktur template:</p>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Sheet pertama bernama <strong>Sheet1</strong>.</li>
+      <li>Baris pertama adalah header dengan urutan:
+        <text>Alternatif</text>,
+        <text>Reach</text>,
+        <text>Views</text>,
+        <text>Engagement Rate</text>,
+        <text>Branding</text>,
+        <text>CTA</text>,
+        <text>Cost Production</text>.
+      </li>
+      <li>Baris-baris berikutnya berisi data setiap alternatif konten.</li>
+      <li>Pastikan tidak mengubah label dari excel (cth: Bobot -> Bbt).</li>
+    </ul>
+  </div>
+
+  <div class="pt-2">
+    <p class="mb-1">Belum punya file-nya?</p>
+    <a href="{{ url_for('static', filename='files/template.xlsx') }}"
+       class="inline-block px-4 py-2 text-black rounded bg-yellow-600 hover:brightness-110">
+      Download Template Excel
+    </a>
+  </div>
+</div>
+{% endblock %}

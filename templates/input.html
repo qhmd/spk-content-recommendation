@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}Input Data — Content DSS{% endblock %}
+{% block content %}
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h3 class="text-lg font-semibold">1) Masukkan Alternatif Konten (minimal 2)</h3>
+    <div class="text-sm text-gray-300/70">
+      Tip: masukkan angka sesuai skala kamu (mis. reach = 1000)
+    </div>
+  </div>
+
+  <form method="post" id="dssForm" novalidate>
+    <div class="mb-4 overflow-auto">
+      <table class="w-full table-auto border-collapse bg-[rgba(255,255,255,0.02)] rounded-lg">
+        <thead>
+          <tr class="text-left text-sm text-gray-200/80 border-b border-white/6">
+            <th class="p-3">Nama Konten</th>
+            {% for c, t in criteria %}
+              <th class="p-3">
+                {{ c }}
+                <span class="text-xs text-gray-400">
+                  ({{ t }})
+                </span>
+              </th>
+            {% endfor %}
+            <th class="p-3"></th>
+          </tr>
+        </thead>
+        <tbody id="altsBody">
+          {% for r in range(2) %}
+          <tr class="alt-row">
+            <td class="p-2">
+              <input name="name[]" required
+                     class="w-full rounded px-3 py-2 bg-white/5 placeholder-gray-300 text-sm"
+                     placeholder="Contoh: Video Pendek">
+            </td>
+            {% for j in range(criteria|length) %}
+              <td class="p-2">
+                <!-- visible input -->
+                <input type="text" inputmode="numeric"
+                       name="c{{ j }}_display[]"
+                       required
+                       class="numeric-input w-full rounded px-3 py-2 bg-white/5 text-sm"
+                       placeholder="0">
+                <!-- hidden real value -->
+                <input type="hidden" name="c{{ j }}[]" class="numeric-hidden">
+              </td>
+            {% endfor %}
+            <td class="p-2 text-center">
+              <button type="button"
+                      class="remove-row p-2 rounded hover:bg-white/5"
+                      title="Hapus alternatif" aria-label="Hapus alternatif">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-5 w-5 text-red-300" viewBox="0 0 24 24"
+                     fill="none" stroke="currentColor">
+                  <path d="M3 6h18M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6M10 6V4a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v2"
+                        stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+              </button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <button type="button" id="addAlt"
+              class="px-3 py-2 bg-panel rounded text-sm">+ Tambah Alternatif</button>
+      <span class="text-sm text-gray-300/70">Minimal 2 alternatif</span>
+    </div>
+
+    <hr class="my-6 border-white/6">
+
+    <div>
+      <h3 class="text-lg font-semibold mb-3">
+        2) Masukkan Bobot Kriteria (dalam persen, total harus 100%)
+      </h3>
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-3">
+        {% for idx in range(criteria|length) %}
+          {% set c = criteria[idx][0] %}
+          {% set t = criteria[idx][1] %}
+          <label class="block text-sm">
+            <div class="flex items-baseline justify-between mb-1">
+              <div class="text-xs text-gray-200/80">
+                {{ c }}
+                {% if t=='cost' %}
+                  <span class="text-xs text-yellow-300">(cost)</span>
+                {% else %}
+                  <span class="text-xs text-green-300">(benefit)</span>
+                {% endif %}
+              </div>
+              <div class="text-xs text-gray-300/60" id="help-w{{ idx }}"></div>
+            </div>
+            <div class="flex gap-2">
+              <input type="number" name="w{{ idx }}"
+                     step="any" min="0" max="100"
+                     class="w-full rounded px-3 py-2 bg-white/5 weight-input text-sm"
+                     placeholder="mis. 20">
+              <div class="w-20 flex items-center justify-center text-sm text-gray-900 bg-white/10 rounded">%</div>
+            </div>
+          </label>
+        {% endfor %}
+      </div>
+
+      <div class="mt-3 text-sm">
+        <div id="weightInfo" class="inline-block text-sm py-2 px-3 rounded"></div>
+      </div>
+    </div>
+
+    <div class="mt-6 flex items-center gap-3">
+      <button id="submitBtn"
+              class="px-5 py-3 bg-accent rounded font-semibold text-primarybg"
+              type="submit">
+        Hitung SAW → TOPSIS
+      </button>
+      <button type="button" id="resetForm"
+              class="px-4 py-3 bg-panel rounded">Reset</button>
+      <div id="formMsg" class="ml-4 text-sm"></div>
+    </div>
+  </form>
+</div>
+{% endblock %}
