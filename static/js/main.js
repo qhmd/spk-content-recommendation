@@ -39,7 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isNaN(v)) total += v;
     });
 
-    weightInfo.textContent = `Total bobot: ${total.toFixed(2)}% (harus 100%)`;
+    weightInfo.textContent = 
+  `Total bobot : ${parseFloat(total.toFixed(2)).toString()}% (harus 100%)`;
+
+    // weightInfo.textContent = `Total bobot : ${total.toFixed(2)}% (harus 100%)`;
 
     weightInfo.className =
       "inline-block text-sm py-2 px-3 rounded " +

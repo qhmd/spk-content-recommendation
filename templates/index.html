@@ -3,17 +3,19 @@
 {% block content %}
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
   <div class="p-6 rounded-xl">
-    <h2 class="text-3xl font-bold mb-3">Ambil Keputusan Jenis Konten</h2>
+    <h2 class="text-3xl font-bold mb-3">Ambil Keputusan Jenis Konten Pada Brand</h2>
     <p class="text-gray-300/70 mb-6">
-      Gunakan kombinasi <span class="font-semibold">SAW</span> (normalisasi) dan
+      Sistem ini di buat untuk mendukung pengambilan keputusan dalam pemilihan jenis konten pada suatu brand
+      <!-- Gunakan kombinasi <span class="font-semibold">SAW</span> (normalisasi) dan
       <span class="font-semibold">TOPSIS</span> (perankingan)
-      untuk menentukan jenis konten yang paling efektif menurut kriteria kamu.
+      untuk menentukan jenis konten yang paling efektif menurut kriteria kamu. -->
     </p>
 
     <ul class="space-y-2 text-sm">
-      <li>• Input alternatif konten (minimal 2)</li>
-      <li>• Isi bobot kriteria sesuai prioritas</li>
-      <li>• Sistem akan menampilkan hasil menggunakan metode SAW dan TOPSIS</li>
+      <li><b>Alur</b></li>
+      <li>1. Input alternatif konten (minimal 2) / Upload file Excel (Sudah Disertai Bobot)</li>
+      <li>2. Isi bobot kriteria sesuai prioritas jika menggunakan Input Manual</li>
+      <li>3. Sistem akan menampilkan hasil menggunakan metode SAW Sebagai Normalisasi Nilai dan TOPSIS Sebagai Normalisasi Terbobot - Perangkingan</li>
     </ul>
 
     <div class="mt-6">
@@ -33,27 +35,27 @@
     <h3 class="text-xl font-semibold mb-2">Kriteria yang digunakan</h3>
     <div class="grid grid-cols-2 gap-3 text-sm">
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">Reach</div>
+        <div class="font-medium">Reach (Benefit)</div>
         <div class="text-xs text-gray-200/70">Jumlah jangkauan post</div>
       </div>
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">Views</div>
+        <div class="font-medium">Views (Benefit)</div>
         <div class="text-xs text-gray-200/70">Jumlah tayangan</div>
       </div>
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">Engagement Rate</div>
+        <div class="font-medium">Engagement Rate (Benefit)</div>
         <div class="text-xs text-gray-200/70">Interaksi relatif</div>
       </div>
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">Branding</div>
+        <div class="font-medium">Branding (Benefit)</div>
         <div class="text-xs text-gray-200/70">Nilai brand building</div>
       </div>
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">CTA</div>
+        <div class="font-medium">CTA (Benefit)</div>
         <div class="text-xs text-gray-200/70">Efektivitas call-to-action</div>
       </div>
       <div class="p-3 rounded bg-white/5">
-        <div class="font-medium">Cost Production</div>
+        <div class="font-medium">Cost Production (Cost)</div>
         <div class="text-xs text-gray-200/70">Biaya produksi (semakin kecil lebih baik)</div>
       </div>
     </div>

@@ -24,14 +24,15 @@
       {% endfor %}
       {% if weights %}
         <tr class="border-t border-white/10">
-        <td class="p-2 font-semibold">Bobot (terdeteksi)</td>
+        <td class="p-2 font-semibold">
+          Bobot ({{ '%g'|format(weights|sum) }}%)
+        </td>
         {% for w in weights %}
-            <td class="p-2 text-center font-semibold">
-            {{ '%g'|format(w) }}
-            </td>
+          <td class="p-2 text-center font-semibold">
+            {{ '%g'|format(w) }}%
+          </td>
         {% endfor %}
         </tr>
-
       {% endif %}
     </tbody>
   </table>
